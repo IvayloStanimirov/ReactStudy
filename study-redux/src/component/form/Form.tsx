@@ -6,7 +6,7 @@ import {formStyles} from "./styles";
 import {ReduxState} from "app/redux/ReduxState";
 import {SetEmail, SetName, SetPhone} from "app/redux/ReduxActions";
 
-interface FormProps extends WithStyles<any> {
+interface IProps extends WithStyles<any> {
 
     name: string;
     email: string;
@@ -14,41 +14,37 @@ interface FormProps extends WithStyles<any> {
     dispatch?: Dispatch<ReduxState>;
 }
 
-class Form extends React.Component<FormProps, any> {
+const Form: React.FunctionComponent<IProps> = ({classes, name, email, phone, dispatch}: IProps) => {
 
-    public render() {
-        const {classes, name, email, phone, dispatch} = this.props;
-
-        return (
-            <div className={classes.root}>
-                <div className={classes.section}>
-                    <div className={classes.title}>Name:</div>
-                    <input type="text" value={name} className={classes.input}
-                           onChange={(e) => {
-                               dispatch(new SetName(e.target.value));
-                           }}
-                    />
-                </div>
-                <div className={classes.section}>
-                    <div className={classes.title}>Email:</div>
-                    <input type="text" value={email} className={classes.input}
-                           onChange={(e) => {
-                               dispatch(new SetEmail(e.target.value));
-                           }}
-                    />
-                </div>
-                <div className={classes.section}>
-                    <div className={classes.title}>Phone Number:</div>
-                    <input type="text" value={phone} className={classes.input}
-                           onChange={(e) => {
-                               dispatch(new SetPhone(e.target.value));
-                           }}
-                    />
-                </div>
+    return (
+        <div className={classes.root}>
+            <div className={classes.section}>
+                <div className={classes.title}>Name:</div>
+                <input type="text" value={name} className={classes.input}
+                       onChange={(e) => {
+                           dispatch(new SetName(e.target.value));
+                       }}
+                />
             </div>
-        );
-    }
-}
+            <div className={classes.section}>
+                <div className={classes.title}>Email:</div>
+                <input type="text" value={email} className={classes.input}
+                       onChange={(e) => {
+                           dispatch(new SetEmail(e.target.value));
+                       }}
+                />
+            </div>
+            <div className={classes.section}>
+                <div className={classes.title}>Phone Number:</div>
+                <input type="text" value={phone} className={classes.input}
+                       onChange={(e) => {
+                           dispatch(new SetPhone(e.target.value));
+                       }}
+                />
+            </div>
+        </div>
+    );
+};
 
 export default connect((state: ReduxState, ownProps: any) => {
         const {name, email, phone} = state.form;
@@ -58,7 +54,7 @@ export default connect((state: ReduxState, ownProps: any) => {
             phone
         });
     },
-    (dispatch: Dispatch<ReduxState>, ownProps: FormProps) => {
+    (dispatch: Dispatch<ReduxState>, ownProps: IProps) => {
         return Object.assign({}, ownProps, {
             dispatch
         });

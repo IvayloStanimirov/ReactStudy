@@ -1,5 +1,8 @@
-/* tslint:disable:no-console */
 /* tslint:disable:no-consecutive-blank-lines */
+
+import Logger from "core/logger/Logger";
+
+const logger: Logger = Logger.Of("Logger");
 
 interface Shape {
 
@@ -61,7 +64,7 @@ class Rectangle extends BaseShape {
     }
 
     public draw(): void {
-        console.log("Draw Rectangle. Id: " + this.id);
+        logger.debug("Draw Rectangle. Id: " + this.id);
     }
 
     public square(): number {
@@ -86,7 +89,7 @@ class Circle extends BaseShape {
     }
 
     public draw(): void {
-        console.log("Draw Circle. Id: " + this.id);
+        logger.debug("Draw Circle. Id: " + this.id);
     }
 
     public square(): number {
@@ -98,6 +101,7 @@ class Circle extends BaseShape {
 
 
 const testShapes = () => {
+    logger.debug("-------- Start test shapes --------");
     const shapes: Shape[] = [
         new Rectangle(0, 10, 20),
         new Rectangle(1, 15, 5, "#00FF00"),
@@ -106,23 +110,25 @@ const testShapes = () => {
     ];
     shapes.forEach((shape: Shape) => {
         shape.draw();
-        console.log("Shape square: ", shape.square());
+        logger.debug("Shape square: ", shape.square());
     });
+    logger.debug("-------- Finish test shapes --------");
 };
 
-// testShapes();
+testShapes();
 
 
 
 
 const testCustomShapes = () => {
+    logger.debug("-------- Start test custom shapes --------");
     const rectangle: Rectangle = new Rectangle(0, 15, 5, "#00FF00");
     const circle: Circle = new Circle(1, 3, "#0000FF");
 
     const customShape: Shape = new (class CustomShape implements Shape {
         public color: string = "#FFFF00";
         public draw(): void {
-            console.log("Draw CustomShape");
+            logger.debug("Draw CustomShape");
         }
         public square(): number {
             return -1;
@@ -134,7 +140,7 @@ const testCustomShapes = () => {
             super(3);
         }
         public draw(): void {
-            console.log("Draw AnotherShape. Id: " + this.id);
+            logger.debug("Draw AnotherShape. Id: " + this.id);
         }
         public square(): number {
             return -2;
@@ -154,20 +160,23 @@ const testCustomShapes = () => {
 
     shapes.forEach((shape: Shape) => {
         shape.draw();
-        console.log("Shape square: " + shape.square());
+        logger.debug("Shape square: " + shape.square());
 
         if (shape instanceof BaseShape) {
             const baseShape: BaseShape = (shape as BaseShape);
             const relatedShape: Shape = baseShape.relatedShape;
             if (relatedShape !== null && relatedShape !== undefined) {
                 if (relatedShape instanceof BaseShape) {
-                    console.log("Related shape Id: " + (relatedShape as BaseShape).square());
+                    logger.debug("Related shape Id: " + (relatedShape as BaseShape).square());
                 } else {
-                    console.log("Related shape square: " + relatedShape.square());
+                    logger.debug("Related shape square: " + relatedShape.square());
                 }
             }
         }
     });
+    logger.debug("-------- Finish test custom shapes --------");
 };
 
-// testCustomShapes();
+testCustomShapes();
+
+process.exit();

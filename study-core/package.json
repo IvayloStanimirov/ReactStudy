@@ -13,7 +13,7 @@
     "src"
   ],
   "scripts": {
-    "basic": "ts-node-dev --respawn -P tsconfig.ts-node-dev.json -r tsconfig-paths/register ./src/basic.ts",
+    "basic": "ts-node-dev -P tsconfig.ts-node-dev.json -r tsconfig-paths/register ./src/basic.ts",
     "start": "ts-node-dev -P tsconfig.ts-node-dev.json -r tsconfig-paths/register ./src/start.ts",
     "test": "ts-mocha --paths -p tsconfig.ts-node-dev.json -r tsconfig-paths/register src/**/*.spec.ts",
     "watch": "webpack-dev-server",

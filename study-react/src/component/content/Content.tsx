@@ -9,17 +9,17 @@ import Clock from "component/clock/Clock";
 import Utils from "util/Utils";
 import Timer from "component/timer/Timer";
 
-interface ContentProps extends WithStyles<any> {
+interface IProps extends WithStyles<any> {
 
     classes: any;
 }
 
-interface ContentState {
+interface IState {
 
-    isRedClock: boolean;
+    isRedClock?: boolean;
 }
 
-class Content extends React.Component<ContentProps, any> {
+class Content extends React.Component<IProps, IState> {
 
     private _clockSwitcher: any;
 

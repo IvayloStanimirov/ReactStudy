@@ -6,24 +6,21 @@ import {AppContext} from "app/context/AppContext";
 import Header from "component/header/Header";
 import Content from "component/content/Content";
 
-export interface RootProps extends WithStyles<any> {
+interface IProps extends WithStyles<any> {
 
     classes: any;
 }
 
-class Root extends React.Component<RootProps> {
+const Root: React.FunctionComponent<IProps> = ({classes}: IProps) => {
 
-    public render() {
-        const {classes} = this.props;
-        return (
-            <AppContext>
-                <div className={classes.root}>
-                    <Header />
-                    <Content />
-                </div>
-            </AppContext>
-        );
-    }
-}
+    return (
+        <AppContext>
+            <div className={classes.root}>
+                <Header/>
+                <Content/>
+            </div>
+        </AppContext>
+    );
+};
 
 export default withStyles(rootStyles)(Root);

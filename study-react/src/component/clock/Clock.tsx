@@ -4,18 +4,18 @@ import {clockStyles} from "./styles";
 import DateTime from "core/format/DateTime";
 import Utils from "util/Utils";
 
-interface ClockProps extends WithStyles<any> {
+interface IProps extends WithStyles<any> {
 
     isRed: boolean;
 }
 
-interface ClockState {
+interface IState {
 
     value?: number;
     isRed?: boolean;
 }
 
-class Clock extends React.Component<ClockProps, ClockState> {
+class Clock extends React.Component<IProps, IState> {
 
     private _registration: any;
 
@@ -26,7 +26,7 @@ class Clock extends React.Component<ClockProps, ClockState> {
         };
     }
 
-    public static getDerivedStateFromProps(nextProps: ClockProps, prevState: ClockState): ClockState {
+    public static getDerivedStateFromProps(nextProps: IProps, prevState: IState): IState {
         if (prevState.isRed !== nextProps.isRed) {
             return {
                 isRed: nextProps.isRed
@@ -52,7 +52,7 @@ class Clock extends React.Component<ClockProps, ClockState> {
         }
     }
 
-    public shouldComponentUpdate(nextProps: Readonly<WithStyles<any>>, nextState: Readonly<ClockState>, nextContext: any): boolean {
+    public shouldComponentUpdate(nextProps: Readonly<WithStyles<any>>, nextState: Readonly<IState>, nextContext: any): boolean {
         const seconds: number = new Date(this.state.value).getSeconds();
         const asString: string = seconds.toString(10);
         return parseInt(asString.charAt(0), 10) % 2 !== 0;

@@ -2,21 +2,17 @@ import React from "react";
 import withStyles, {WithStyles} from "react-jss";
 import {headerStyles} from "./styles";
 
-export interface HeaderProps extends WithStyles<any> {
+interface IProps extends WithStyles<any> {
 
 }
 
-class Header extends React.Component<HeaderProps> {
+const Header: React.FunctionComponent<IProps> = ({classes}: IProps) => {
 
-    public render() {
-        const {classes} = this.props;
-
-        return (
-            <div className={classes.root}>
-                <div className={classes.logo}></div>
-            </div>
-        );
-    }
-}
+    return (
+        <div className={classes.root}>
+            <div className={classes.logo}></div>
+        </div>
+    );
+};
 
 export default withStyles(headerStyles)(Header);

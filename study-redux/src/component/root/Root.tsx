@@ -5,22 +5,18 @@ import {rootStyles} from "./styles";
 import Header from "component/header/Header";
 import Content from "component/content/Content";
 
-export interface RootProps extends WithStyles<any> {
+interface IProps extends WithStyles<any> {
 
-    classes: any;
 }
 
-class Root extends React.Component<RootProps> {
+const Root: React.FunctionComponent<IProps> = ({classes}: IProps) => {
 
-    public render() {
-        const {classes} = this.props;
-        return (
-            <div className={classes.root}>
-                <Header />
-                <Content />
-            </div>
-        );
-    }
-}
+    return (
+        <div className={classes.root}>
+            <Header />
+            <Content />
+        </div>
+    );
+};
 
 export default withStyles(rootStyles)(Root);
